@@ -267,6 +267,11 @@ export interface LibraryOptions {
    * format as an argument.
    */
   fileName?: string | ((format: ModuleFormat, entryName: string) => string)
+  /**
+   * Whether to emit asset files (e.g. PNG/JPG files) for the library target.
+   * @default false
+   * */
+  emitAssets?: boolean
 }
 
 export type LibraryFormats = 'es' | 'cjs' | 'umd' | 'iife'

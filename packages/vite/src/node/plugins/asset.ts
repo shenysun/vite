@@ -336,13 +336,17 @@ async function fileToBuiltUrl(
 
   let url: string
   if (
-    config.build.lib ||
+    (config.build.lib && !config.build.lib.emitAssets) ||
     (!file.endsWith('.svg') &&
       !file.endsWith('.html') &&
       content.length < Number(config.build.assetsInlineLimit) &&
       !isGitLfsPlaceholder(content))
   ) {
-    if (config.build.lib && isGitLfsPlaceholder(content)) {
+    if (
+      config.build.lib &&
+      !config.build.lib.emitAssets &&
+      isGitLfsPlaceholder(content)
+    ) {
       config.logger.warn(
         colors.yellow(`Inlined file ${id} was not downloaded via Git LFS`),
       )
